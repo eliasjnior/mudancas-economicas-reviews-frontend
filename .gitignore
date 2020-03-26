@@ -1,0 +1,14 @@
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# App
+node_modules
+dist
+
+# Temp
+tmp
