@@ -1,6 +1,6 @@
-# Mudanças Econômicas Vue JSX
+# Mudanças Econômicas React
 
-This is a Vue app that will compile into a single file. This file will be loaded on the page and will render following components:
+This is a React app that will compile into a single file. This file will be loaded on the page and will render following components:
 
 ## Single review
 

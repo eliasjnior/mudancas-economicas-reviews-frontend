@@ -1,9 +1,8 @@
-import Vue from "vue";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import App from "./App";
+import App from './App';
 
-window.VueApps = window.VueApps || {};
-
-document.querySelectorAll("[data-review]").forEach((el, index) => {
-  VueApps[index] = new Vue({ el, render: (h) => <App /> });
+document.querySelectorAll('[data-review]').forEach((el) => {
+  ReactDOM.render(<App />, el);
 });
