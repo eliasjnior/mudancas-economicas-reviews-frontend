@@ -31,5 +31,9 @@ module.exports = {
       { extensions: ['.jsx', '.js'] },
     ],
     'import/prefer-default-export': 'off',
+    'no-underscore-dangle': [
+      'error',
+      {allow: ['__meta__']}
+    ]
   },
 };

@@ -9,3 +9,29 @@ The component will render a company review when find:
 ```html
 <div data-review="COMPANY_ID"></div>
 ```
+
+# Build
+
+First you need to install all dependencies:
+
+```bash
+yarn install
+```
+
+## Development (watch)
+
+```bash
+yarn run start
+```
+
+## Developement (build)
+
+```bash
+yarn build
+```
+
+## Production
+
+```bash
+yarn build:prod
+```

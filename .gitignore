@@ -9,6 +9,7 @@
 # App
 node_modules
 dist
+.env
 
 # Temp
 tmp
