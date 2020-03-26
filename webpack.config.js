@@ -1,9 +1,9 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  resolve: { 
-    alias: { 
-      vue: 'vue/dist/vue.esm.js',
+  resolve: {
+    alias: {
+      vue: "vue/dist/vue.esm.js",
     },
   },
   module: {
@@ -12,14 +12,14 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: "babel-loader",
         },
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: "src/index.html",
     }),
-  ]
+  ],
 };
