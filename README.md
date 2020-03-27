@@ -21,7 +21,7 @@ yarn install
 ## Development (watch)
 
 ```bash
-yarn run start
+yarn start
 ```
 
 ## Developement (build)
