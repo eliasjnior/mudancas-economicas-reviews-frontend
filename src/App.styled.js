@@ -1,7 +1,11 @@
 import styled, { css } from 'styled-components';
 
-import { Avatar, CircularProgress } from '@material-ui/core';
+import { Avatar, CircularProgress, DialogContent } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
+
+export const DialogContentCentered = styled(DialogContent)`
+  text-align: center;
+`;
 
 export const Container = styled.div`
   border: 1px solid #aaa;

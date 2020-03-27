@@ -19,4 +19,8 @@ module.exports = {
       template: 'src/index.html',
     }),
   ],
+  devServer: {
+    compress: true,
+    disableHostCheck: true,
+  },
 };

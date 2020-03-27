@@ -4,6 +4,12 @@ const Api = {
   getCompany: (companyId) => {
     return axios.get(`${process.env.API_URL}/api/v1/companies/${companyId}`);
   },
+  addReview: (companyId, data) => {
+    return axios.post(
+      `${process.env.API_URL}/api/v1/companies/${companyId}/reviews`,
+      data
+    );
+  },
 };
 
 export default Api;
