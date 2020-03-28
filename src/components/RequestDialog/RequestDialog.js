@@ -13,18 +13,18 @@ import {
 } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import CompanyType from '../../prop-types/Company.type';
-import { Loading } from './RequestDialog.styled';
+import {
+  Loading,
+  FormControl,
+  RatingContainer,
+  ErrorForm,
+} from './RequestDialog.styled';
 import Alert from '../Alert';
 
 import Api from '../../services/Api';
 
 export default function RequestDialog({ company, open, close }) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    rating: null,
-    review: '',
-  });
+  const [formData, setFormData] = useState({});
 
   const [errors, setErrors] = useState({});
 
@@ -35,6 +35,8 @@ export default function RequestDialog({ company, open, close }) {
   function handleSubmit() {
     setLoading(true);
 
+    setErrors({});
+
     Api.addReview(company.id, formData)
       .then((response) => {
         // Set success message
@@ -43,8 +45,18 @@ export default function RequestDialog({ company, open, close }) {
         // Close the dialog
         close();
       })
-      .catch((error) => {
+      .catch((exceptionError) => {
         // Set error message
+        if (exceptionError.response.status === 500) {
+          const newErrors = {};
+
+          exceptionError.response.data.errors.forEach((errorItem) => {
+            newErrors[errorItem.path] = errorItem.message;
+          });
+
+          setErrors(newErrors);
+        }
+
         setError(true);
       })
       .finally(() => {
@@ -58,6 +70,12 @@ export default function RequestDialog({ company, open, close }) {
       ...formData,
       [key]: value,
     });
+  }
+
+  function handleClose() {
+    setErrors({});
+    setFormData({});
+    close();
   }
 
   return (
@@ -83,7 +101,7 @@ export default function RequestDialog({ company, open, close }) {
       </Snackbar>
       <Dialog
         open={open}
-        onClose={() => !loading && close()}
+        onClose={() => !loading && handleClose()}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle>Avaliar a empresa {company.name}</DialogTitle>
@@ -98,17 +116,20 @@ export default function RequestDialog({ company, open, close }) {
             label="Nome"
             type="text"
             variant="outlined"
-            error={errors.name}
+            error={!!errors.name}
+            helperText={errors.name}
             fullWidth
             disabled={loading}
-            onChange={(event) => changeFormData('rating', event.target.value)}
+            onChange={(event) => changeFormData('name', event.target.value)}
           />
+          {error.name}
           <TextField
             id="email"
             margin="normal"
             label="Email"
             type="email"
-            error={errors.email}
+            error={!!errors.email}
+            helperText={errors.email}
             variant="outlined"
             fullWidth
             disabled={loading}
@@ -119,21 +140,27 @@ export default function RequestDialog({ company, open, close }) {
             margin="normal"
             label="Mensagem"
             fullWidth
-            error={errors.review}
+            error={!!errors.review}
+            helperText={errors.review}
             multiline
             variant="outlined"
             rows="5"
             disabled={loading}
             onChange={(event) => changeFormData('review', event.target.value)}
           />
-          <Rating
-            name="rating"
-            disabled={loading}
-            onChange={(any, value) => changeFormData('rating', value)}
-          />
+          <FormControl>
+            <RatingContainer error={!!errors.rating}>
+              <Rating
+                name="rating"
+                disabled={loading}
+                onChange={(any, value) => changeFormData('rating', value)}
+              />
+            </RatingContainer>
+            {errors.rating && <ErrorForm>{errors.rating}</ErrorForm>}
+          </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={close} color="primary" disabled={loading}>
+          <Button onClick={handleClose} color="primary" disabled={loading}>
             Cancelar
           </Button>
           <Button onClick={handleSubmit} disabled={loading}>

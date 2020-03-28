@@ -102,3 +102,11 @@ export const Error = styled.p`
   text-align: center;
   color: #aaa;
 `;
+
+export const Text = styled.p`
+  margin: 5px 0;
+  font-size: 0.9em;
+  color: #000;
+  text-align: center;
+  font-weight: 300;
+`;

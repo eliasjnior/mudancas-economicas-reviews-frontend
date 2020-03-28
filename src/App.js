@@ -20,6 +20,7 @@ import {
   ReviewContent,
   Loading,
   Error,
+  Text,
 } from './App.styled';
 import Api from './services/Api';
 import RequestDialog from './components/RequestDialog';
@@ -75,6 +76,8 @@ export default function App({ companyId }) {
                   </ReviewCount>
                 </>
               )}
+              {company.cnpj && <Text>CNPJ: {company.cnpj}</Text>}
+              {company.phones && <Text>{company.phones}</Text>}
             </ContainerHeader>
 
             {company.__meta__.last_review && (
