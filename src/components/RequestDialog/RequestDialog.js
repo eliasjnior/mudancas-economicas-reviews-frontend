@@ -35,12 +35,13 @@ export default function RequestDialog({ company, open, close }) {
   function handleSubmit() {
     setLoading(true);
 
+    setError(false);
     setErrors({});
 
     Api.addReview(company.id, formData)
       .then((response) => {
         // Set success message
-        setSuccess(true);
+        setSuccess(response.message);
 
         // Close the dialog
         close();
@@ -57,7 +58,11 @@ export default function RequestDialog({ company, open, close }) {
           setErrors(newErrors);
         }
 
-        setError(true);
+        if (exceptionError.response.data.message) {
+          setError(exceptionError.response.data.message);
+        } else {
+          setError('Houve um erro desconhecido. Tente novamente.');
+        }
       })
       .finally(() => {
         // Always disable loading
@@ -81,7 +86,7 @@ export default function RequestDialog({ company, open, close }) {
   return (
     <>
       <Snackbar
-        open={success}
+        open={!!success}
         autoHideDuration={5000}
         onClose={() => setSuccess(false)}
       >
@@ -91,12 +96,12 @@ export default function RequestDialog({ company, open, close }) {
         </Alert>
       </Snackbar>
       <Snackbar
-        open={error}
+        open={!!error}
         autoHideDuration={5000}
         onClose={() => setError(false)}
       >
         <Alert onClose={() => setError(false)} severity="error">
-          Houve um erro ao enviar o formulário.
+          {error}
         </Alert>
       </Snackbar>
       <Dialog
