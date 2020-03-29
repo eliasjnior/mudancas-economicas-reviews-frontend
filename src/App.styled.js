@@ -8,9 +8,7 @@ export const DialogContentCentered = styled(DialogContent)`
 `;
 
 export const Container = styled.div`
-  border: 1px solid #aaa;
   border-radius: 3px;
-  padding: 15px;
   margin-bottom: 15px;
   font-family: 'Roboto', sans-serif;
   position: relative;

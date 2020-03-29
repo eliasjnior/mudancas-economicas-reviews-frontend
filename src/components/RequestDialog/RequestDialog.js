@@ -120,6 +120,7 @@ export default function RequestDialog({ company, open, close }) {
             helperText={errors.name}
             fullWidth
             disabled={loading}
+            required
             onChange={(event) => changeFormData('name', event.target.value)}
           />
           {error.name}
@@ -133,6 +134,7 @@ export default function RequestDialog({ company, open, close }) {
             variant="outlined"
             fullWidth
             disabled={loading}
+            required
             onChange={(event) => changeFormData('email', event.target.value)}
           />
           <TextField
