@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { parseISO, format } from 'date-fns';
 
 import { Tooltip, Fab } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
@@ -34,7 +35,15 @@ export default function App({ companyId }) {
   useEffect(() => {
     Api.getCompany(companyId)
       .then(({ data }) => {
-        setCompany(data);
+        const newData = data;
+
+        if (data.__meta__.last_review) {
+          const date = parseISO(data.__meta__.last_review.created_at);
+          const formattedDate = format(date, 'dd/MM/yyyy');
+          newData.__meta__.last_review.formatted_date = formattedDate;
+        }
+
+        setCompany(newData);
         setLoading(false);
       })
       .catch(() => {
@@ -94,9 +103,7 @@ export default function App({ companyId }) {
                       value={company.__meta__.last_review.rating}
                     />
                     <ReviewDate>
-                      {new Date(
-                        company.__meta__.last_review.created_at
-                      ).toLocaleDateString()}
+                      {company.__meta__.last_review.formatted_date}
                     </ReviewDate>
                   </HeaderContainer>
                 </ReviewHeader>
