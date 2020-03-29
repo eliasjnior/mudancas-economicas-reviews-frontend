@@ -41,7 +41,7 @@ export default function RequestDialog({ company, open, close }) {
     Api.addReview(company.id, formData)
       .then((response) => {
         // Set success message
-        setSuccess(response.message);
+        setSuccess(true);
 
         // Close the dialog
         close();
