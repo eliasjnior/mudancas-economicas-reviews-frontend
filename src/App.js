@@ -27,6 +27,8 @@ import Api from './services/Api';
 import RequestDialog from './components/RequestDialog';
 
 export default function App({ companyId }) {
+  console.log('App');
+
   const [company, setCompany] = useState();
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
