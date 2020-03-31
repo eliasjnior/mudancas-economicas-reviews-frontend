@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "yarn webpack --mode development",
-    "build:prod": "yarn webpack --mode production",
+    "build:prod": "yarn webpack --config webpack.config.prod.js --mode production",
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
