@@ -117,7 +117,7 @@ export default function App({ companyId }) {
 
             {!company.__meta__.last_review && (
               <Error>
-                Essa empresa ainda não posusi uma avaliação. Seja o primeiro a
+                Essa empresa ainda não possui uma avaliação. Seja o primeiro a
                 avaliar!
               </Error>
             )}
