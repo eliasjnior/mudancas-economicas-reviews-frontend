@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "yarn webpack --mode development",
-    "build:prod": "yarn webpack --mode production"
+    "build:prod": "yarn webpack --mode production",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
