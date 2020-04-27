@@ -29,6 +29,7 @@ import {
 } from './AllDialog.styled';
 import CompanyPropType from '../../prop-types/Company.type';
 import Api from '../../services/Api';
+import { formatDate } from '../../helpers/formatDate';
 
 export const AllDialog = ({ open, close, company }) => {
   const [data, setData] = useState(null);
@@ -92,7 +93,7 @@ export const AllDialog = ({ open, close, company }) => {
                 <HeaderContainer>
                   <Author>{item.name}</Author>
                   <ReviewRating size="small" readOnly value={item.rating} />
-                  <ReviewDate>date</ReviewDate>
+                  <ReviewDate>{formatDate(item.created_at)}</ReviewDate>
                 </HeaderContainer>
               </ReviewHeader>
               <ReviewContent>{item.review}</ReviewContent>
