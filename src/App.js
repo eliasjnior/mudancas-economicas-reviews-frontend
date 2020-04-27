@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { parseISO, format } from 'date-fns';
 
-import { Tooltip, Fab } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import {
   Container,
@@ -10,25 +10,18 @@ import {
   ContainerFooter,
   Title,
   Image,
-  Review,
-  ReviewHeader,
-  HeaderContainer,
-  AuthorAvatar,
-  Author,
   ReviewRating,
   ReviewCount,
-  ReviewDate,
-  ReviewContent,
   Loading,
   Error,
   Text,
+  Button,
+  Fab,
 } from './App.styled';
 import Api from './services/Api';
 import RequestDialog from './components/RequestDialog';
 
 export default function App({ companyId }) {
-  console.log('App');
-
   const [company, setCompany] = useState();
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
@@ -91,30 +84,6 @@ export default function App({ companyId }) {
               {company.phones && <Text>{company.phones}</Text>}
             </ContainerHeader>
 
-            {company.__meta__.last_review && (
-              <Review>
-                <ReviewHeader>
-                  <AuthorAvatar>
-                    {company.__meta__.last_review.name[0]}
-                  </AuthorAvatar>
-                  <HeaderContainer>
-                    <Author>{company.__meta__.last_review.name}</Author>
-                    <ReviewRating
-                      size="small"
-                      readOnly
-                      value={company.__meta__.last_review.rating}
-                    />
-                    <ReviewDate>
-                      {company.__meta__.last_review.formatted_date}
-                    </ReviewDate>
-                  </HeaderContainer>
-                </ReviewHeader>
-                <ReviewContent>
-                  {company.__meta__.last_review.review}
-                </ReviewContent>
-              </Review>
-            )}
-
             {!company.__meta__.last_review && (
               <Error>
                 Essa empresa ainda não possui uma avaliação. Seja o primeiro a
@@ -123,6 +92,10 @@ export default function App({ companyId }) {
             )}
 
             <ContainerFooter>
+              <Button variant="contained" disableElevation>
+                Ver avaliações
+              </Button>
+
               <Tooltip title="Adicionar nova avaliação" aria-label="add">
                 <Fab
                   size="small"

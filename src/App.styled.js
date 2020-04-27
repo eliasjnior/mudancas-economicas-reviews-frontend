@@ -1,6 +1,12 @@
 import styled, { css } from 'styled-components';
 
-import { Avatar, CircularProgress, DialogContent } from '@material-ui/core';
+import {
+  Avatar,
+  CircularProgress,
+  DialogContent,
+  Button as MaterialButton,
+  Fab as MaterialFab,
+} from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 
 export const DialogContentCentered = styled(DialogContent)`
@@ -46,7 +52,23 @@ export const ContainerHeader = styled.div`
 `;
 
 export const ContainerFooter = styled.div`
-  text-align: right;
+  display: flex;
+`;
+
+export const Button = styled(MaterialButton)`
+  flex: 1;
+
+  &.MuiButtonBase-root {
+    margin-right: 1rem;
+  }
+`;
+
+export const Fab = styled(MaterialFab)`
+  box-shadow: none;
+
+  &.MuiButtonBase-root {
+    box-shadow: none;
+  }
 `;
 
 export const Review = styled.div``;
