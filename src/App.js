@@ -20,12 +20,15 @@ import {
 } from './App.styled';
 import Api from './services/Api';
 import RequestDialog from './components/RequestDialog';
+import { AllDialog } from './components/AllDialog';
 
 export default function App({ companyId }) {
   const [company, setCompany] = useState();
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const [openAll, setOpenAll] = useState(false);
 
   useEffect(() => {
     Api.getCompany(companyId)
@@ -58,7 +61,14 @@ export default function App({ companyId }) {
   return (
     <>
       {!isLoading && !isError && (
-        <RequestDialog company={company} open={open} close={handleClose} />
+        <>
+          <RequestDialog company={company} open={open} close={handleClose} />
+          <AllDialog
+            company={company}
+            open={openAll}
+            close={() => setOpenAll(false)}
+          />
+        </>
       )}
 
       <Container isLoading={isLoading}>
@@ -92,7 +102,11 @@ export default function App({ companyId }) {
             )}
 
             <ContainerFooter>
-              <Button variant="contained" disableElevation>
+              <Button
+                variant="contained"
+                onClick={() => setOpenAll(true)}
+                disableElevation
+              >
                 Ver avaliações
               </Button>
 

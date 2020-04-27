@@ -39,7 +39,7 @@ export default function RequestDialog({ company, open, close }) {
     setErrors({});
 
     Api.addReview(company.id, formData)
-      .then((response) => {
+      .then(() => {
         // Set success message
         setSuccess(true);
 
