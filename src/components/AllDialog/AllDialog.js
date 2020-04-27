@@ -53,6 +53,10 @@ export const AllDialog = ({ open, close, company }) => {
       .finally(() => setLoading(false));
   }, []);
 
+  const handleChangePage = useCallback((event, value) => {
+    loadPage(value);
+  }, []);
+
   useEffect(() => {
     if (open && !data) {
       loadPage(page);
@@ -98,7 +102,12 @@ export const AllDialog = ({ open, close, company }) => {
       </DialogContent>
       <DialogActions>
         <PaginationContainer>
-          <Pagination page={page} count={totalPages} />
+          <Pagination
+            page={page}
+            count={totalPages}
+            disabled={loading}
+            onChange={handleChangePage}
+          />
         </PaginationContainer>
       </DialogActions>
     </Dialog>
